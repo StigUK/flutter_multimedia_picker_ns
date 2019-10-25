@@ -49,6 +49,11 @@ class FileFetcher {
       return JSONArray(list.map { it.toJSONObject() })
     }
 
+    fun getAll(context: Context): JSONArray {
+      var list : List<MediaFile> = getAlls(context);
+      return JSONArray(list.map { it.toJSONObject() })
+    }
+
 
     private fun getImages(context: Context):  List<MediaFile> {
       val list: ArrayList<MediaFile> = ArrayList()
@@ -81,6 +86,22 @@ class FileFetcher {
           list.add(mediaFile);
         }
       }
+      return list;
+    }
+
+    private fun getAlls(context: Context):  List<MediaFile> {
+      val list: ArrayList<MediaFile> = ArrayList()
+
+      var imagelist : List<MediaFile> = getVideos(context);
+      var videoList : List<MediaFile> = getImages(context);
+
+      list.addAll(imagelist);
+      list.addAll(videoList);
+
+      list.sortByDescending { file ->
+        file.dateAdded
+      }
+
       return list;
     }
 
