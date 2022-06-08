@@ -14,7 +14,7 @@ class FlutterPickerPlugin(private val context: Context) : MethodCallHandler {
   companion object {
     @JvmStatic
     fun registerWith(registrar: Registrar) {
-      val channel = MethodChannel(registrar.messenger(), "flutter_picker")
+      val channel = MethodChannel(registrar.messenger(), "fullter_multimedia_picker")
       channel.setMethodCallHandler(FlutterPickerPlugin(registrar.context()))
     }
   }

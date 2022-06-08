@@ -1,9 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutter_picker');
+  const MethodChannel channel = MethodChannel('fullter_multimedia_picker');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
