@@ -1,66 +1,64 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
+
 import 'data/MediaFile.dart';
 
 class FlutterPicker {
-  static const MethodChannel _channel =
-      const MethodChannel('flutter_picker');
+  static const MethodChannel _channel = const MethodChannel('flutter_picker');
 
-  static Future<List<MediaFile>> getAll() async {
-    final String json = await _channel.invokeMethod(
-        "getAll"
-    );
+  static Future<List<MediaFile>?> getAll() async {
+    final String? json = await _channel.invokeMethod("getAll");
+    if (json == null) return null;
     final encoded = jsonDecode(json);
-    return encoded.map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile)).toList();
+    return encoded
+        .map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile))
+        .toList();
   }
 
-
-  static Future<List<MediaFile>> getImage() async {
-    final String json = await _channel.invokeMethod(
-        "getImage"
-    );
+  static Future<List<MediaFile>?> getImage() async {
+    final String? json = await _channel.invokeMethod("getImage");
+    if (json == null) return null;
     final encoded = jsonDecode(json);
-    return encoded.map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile)).toList();
+    return encoded
+        .map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile))
+        .toList();
   }
 
-  static Future<List<MediaFile>> getVideo() async {
-    final String json = await _channel.invokeMethod(
-        "getVideo"
-    );
+  static Future<List<MediaFile>?> getVideo() async {
+    final String? json = await _channel.invokeMethod("getVideo");
+    if (json == null) return null;
     final encoded = jsonDecode(json);
-    return encoded.map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile)).toList();
+    return encoded
+        .map<MediaFile>((mediaFile) => MediaFile.fromJson(mediaFile))
+        .toList();
   }
 
-  static Future<MediaFile> getMediaFile({
-    @required String fileId,
-    @required MediaType type,
+  static Future<MediaFile?> getMediaFile({
+    required String fileId,
+    required MediaType type,
   }) async {
-    final String json = await _channel.invokeMethod(
+    final String? json = await _channel.invokeMethod(
       'getMediaFile',
-      {
-        "fileId": fileId,
-        "type": type.index
-      },
+      {"fileId": fileId, "type": type.index},
     );
+    if (json == null) return null;
     final encoded = jsonDecode(json);
     return MediaFile.fromJson(encoded);
   }
 
-  static Future<String> getThumbnail({
-    @required String fileId,
-    @required MediaType type,
-  }) async {
-    final String path = await _channel.invokeMethod(
-      'getThumbnail',
-      {
-        "fileId": fileId,
-        "type": type.index,
-      },
-    );
-    return path;
-  }
+  static Future<String?> getThumbnail({
+    required String fileId,
+    required MediaType type,
+  }) =>
+      _channel.invokeMethod(
+        'getThumbnail',
+        {
+          "fileId": fileId,
+          "type": type.index,
+        },
+      );
 
   static int orientationToQuarterTurns(int orientationInDegrees) {
     switch (orientationInDegrees) {
