@@ -3,7 +3,7 @@ import 'dart:io';
 //import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_picker/flutter_picker.dart';
+import 'package:flutter_picker/flutter_multimedia_picker.dart';
 import 'package:flutter_picker/data/MediaFile.dart';
 
 import 'PickerWidget.dart';
@@ -39,33 +39,33 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> getMedia() async {
     try {
-      List<MediaFile> imageMediaFileList = await FlutterPicker.getImage();
+      List<MediaFile> imageMediaFileList = await FlutterMultiMediaPicker.getImage();
       print("imageMediaFileList");
       print(imageMediaFileList);
 
-      List<MediaFile> videoMediaFileList = await FlutterPicker.getVideo();
+      List<MediaFile> videoMediaFileList = await FlutterMultiMediaPicker.getVideo();
       print("videoMediaFileList");
       print(videoMediaFileList);
 
-      MediaFile imageMediaFile1 = await FlutterPicker.getMediaFile(
+      MediaFile imageMediaFile1 = await FlutterMultiMediaPicker.getMediaFile(
           fileId: imageMediaFileList[0].id, type: MediaType.IMAGE);
       print("imageMediaFile1");
       print(imageMediaFile1.thumbnailPath);
 
-      MediaFile videoMediaFile1 = await FlutterPicker.getMediaFile(
+      MediaFile videoMediaFile1 = await FlutterMultiMediaPicker.getMediaFile(
           fileId: videoMediaFileList[0].id, type: MediaType.VIDEO);
       print("videoMediaFile1");
       print(videoMediaFile1.thumbnailPath);
 
       if (imageMediaFileList.length > 0) {
-        String imageMediaFile2 = await FlutterPicker.getThumbnail(
+        String imageMediaFile2 = await FlutterMultiMediaPicker.getThumbnail(
             fileId: imageMediaFileList[0].id, type: MediaType.IMAGE);
         print("imageMediaFile2");
         print(imageMediaFile2);
       }
 
       if (videoMediaFileList.length > 0) {
-        String videoMediaFile2 = await FlutterPicker.getThumbnail(
+        String videoMediaFile2 = await FlutterMultiMediaPicker.getThumbnail(
             fileId: videoMediaFileList[0].id, type: MediaType.VIDEO);
         print("videoMediaFile2");
         print(videoMediaFile2);
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
             RaisedButton(
                 child: const Text("Show All Media"),
                 onPressed: () {
-                  FlutterPicker.getAll().then((mediaFiles) {
+                  FlutterMultiMediaPicker.getAll().then((mediaFiles) {
                     //print(mediaFiles);
                     _awaitReturnValueFromSecondScreen(context, mediaFiles);
                   });
@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
             RaisedButton(
                 child: const Text("Show Image Media"),
                 onPressed: () {
-                  FlutterPicker.getImage().then((mediaFiles) {
+                  FlutterMultiMediaPicker.getImage().then((mediaFiles) {
                     //print(mediaFiles);
                     _awaitReturnValueFromSecondScreen(context, mediaFiles);
                   });
@@ -103,7 +103,7 @@ class _MyAppState extends State<MyApp> {
             RaisedButton(
                 child: const Text("Show Video Media"),
                 onPressed: () {
-                  FlutterPicker.getVideo().then((mediaFiles) {
+                  FlutterMultiMediaPicker.getVideo().then((mediaFiles) {
                     //print(mediaFiles);
                     _awaitReturnValueFromSecondScreen(context, mediaFiles);
                   });

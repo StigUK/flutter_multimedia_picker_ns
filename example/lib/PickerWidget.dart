@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_picker/data/MediaFile.dart';
 import 'GalleryWidget.dart';
 import 'MultiSelectorModel.dart';
-import 'package:flutter_picker/flutter_picker.dart';
+import 'package:flutter_picker/flutter_multimedia_picker.dart';
 
 class PickerWidget extends StatefulWidget {
 
